@@ -28,6 +28,7 @@ var SerialPort = require('serialport'); // serial library
 var Readline = SerialPort.parsers.Readline; // read serial data as lines
 //-- Addition:
 var NodeWebcam = require( "node-webcam" );// load the webcam module
+var gifshot = require('gifshot'); // load the gifshot module
 
 //---------------------- WEBAPP SERVER SETUP ---------------------------------//
 // use express to create the simple webapp
@@ -90,6 +91,25 @@ parser.on('data', function(data) {
   io.emit('server-msg', data);
 });
 //----------------------------------------------------------------------------//
+var imageNames = [];
+var cameraTimer;
+function takePicture(){
+  /// First, we create a name for the new picture.
+  /// The .replace() function removes all special characters from the date.
+  /// This way we can use it as the filename.
+  var imageName = new Date().toString().replace(/[&\/\\#,+()$~%.'":*?<>{}\s-]/g, '');
+
+  console.log('making a making a picture at'+ imageName); // Second, the name is logged to the console.
+
+  //Third, the picture is  taken and saved to the `public/`` folder
+  NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
+  io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
+  /// The browser will take this new name and load the picture from the public folder.
+});
+  imageNames.push(imageName + '.jpg');
+}
+
+
 
 
 //---------------------- WEBSOCKET COMMUNICATION (web browser)----------------//
@@ -111,24 +131,26 @@ io.on('connect', function(socket) {
   });
 
   //-- Addition: This function is called when the client clicks on the `Take a picture` button.
-  socket.on('takePicture', function() {
-    /// First, we create a name for the new picture.
-    /// The .replace() function removes all special characters from the date.
-    /// This way we can use it as the filename.
-    var imageName = new Date().toString().replace(/[&\/\\#,+()$~%.'":*?<>{}\s-]/g, '');
+  socket.on('takePicture', takePicture);
 
-    console.log('making a making a picture at'+ imageName); // Second, the name is logged to the console.
-
-    //Third, the picture is  taken and saved to the `public/`` folder
-    NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
-    io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
-    /// The browser will take this new name and load the picture from the public folder.
+  socket.on('startRecording', function(){
+    console.log("Set Interval");
+    cameraTimer = setInterval(takePicture, 1000);
   });
 
+  socket.on('stopRecording',function(){
+   clearInterval(cameraTimer);
+   console.log("recording stopped");
+   console.log(imageNames.toString());
+   io.emit('makegif',imageNames);
+
   });
+
   // if you get the 'disconnect' message, say the user disconnected
   socket.on('disconnect', function() {
     console.log('user disconnected');
   });
 });
+
+
 //----------------------------------------------------------------------------//
