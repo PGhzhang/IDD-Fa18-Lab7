@@ -11,6 +11,7 @@
 ## Part A. HelloYou from the Raspberry Pi
 
 **a. Link to a video of your HelloYou sketch running.**
+
 [![](http://img.youtube.com/vi/ItMW1Az5zGM/0.jpg)](http://www.youtube.com/watch?v=ItMW1Az5zGM "")
 
 
@@ -30,4 +31,4 @@
 
 **b. Upload a video of your working modified project**
 
-[![](http://img.youtube.com/vi/UabNe4CjXhQ/0.jpg)](http://www.youtube.com/watch?v=UabNe4CjXhQ "")
+[![](http://img.youtube.com/vi/tt_92T8LOrk/0.jpg)](http://www.youtube.com/watch?v=tt_92T8LOrk "")
