@@ -1,6 +1,6 @@
 # Video Doorbell, Lab 7
 
-*A lab report by John Q. Student*
+*A lab report by Hanyu Zhang*
 
 ### In This Report
 
@@ -11,6 +11,8 @@
 ## Part A. HelloYou from the Raspberry Pi
 
 **a. Link to a video of your HelloYou sketch running.**
+[![](http://img.youtube.com/vi/ItMW1Az5zGM/0.jpg)](http://www.youtube.com/watch?v=ItMW1Az5zGM "")
+
 
 ## Part B. Web Camera
 
@@ -18,8 +20,14 @@
 
 **b. Include a video of your working video doorbell**
 
+[![](http://img.youtube.com/vi/HulxHXfS-Lo/0.jpg)](http://www.youtube.com/watch?v=HulxHXfS-Lo "")
+
+
+
 ## Part C. Make it your own
 
 **a. Find, install, and try out a node-based library and try to incorporate into your lab. Document your successes and failures (totally okay!) for your writeup. This will help others in class figure out cool new tools and capabilities.**
 
 **b. Upload a video of your working modified project**
+
+[![](http://img.youtube.com/vi/UabNe4CjXhQ/0.jpg)](http://www.youtube.com/watch?v=UabNe4CjXhQ "")
